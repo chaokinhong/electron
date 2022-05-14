@@ -1,6 +1,8 @@
 import React from "react";
 import { Layout, Menu } from "antd";
 import RegisterForm from "../component/registerForm";
+import LockElectricityForm from "../component/lockElectricityForm";
+import LoginForm from "../component/loginForm";
 
 
 const GeneratorPage = () => {
@@ -16,7 +18,11 @@ const GeneratorPage = () => {
           </Menu>
         </Sider>
         <Content>
-          <RegisterForm />
+          <div className="flex">
+            <RegisterForm />
+            <LockElectricityForm />
+            <LoginForm/>
+          </div>
         </Content>
       </Layout>
     </Layout>

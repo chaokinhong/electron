@@ -1,50 +1,62 @@
 import React from "react";
-import { Form, Button, Input } from "antd";
+import { Form, Button, Input, Spin } from "antd";
 import { ContractContext } from "../../../context/ContractContext";
 
 const RegisterForm = () => {
   const [regForm] = Form.useForm();
-  const {createContractObject} = React.useContext(ContractContext);
+  const { createContractObject } = React.useContext(ContractContext);
+  const [spin, setSpin] = React.useState(false);
 
- 
 
-  const handleSubmit = async (values) => {
-    
+
+  const handleSubmit = async (e) => {
+
     const contract = await createContractObject();
-    console.log(contract)
+    try {
+      const tx = await contract.registerGenerator(e.email, e.password, e.address)
+      setSpin(true)
+      await tx.wait();
+      setSpin(false)
+    } catch (error) {
+      console.log(error);
+      alert("Please connect to the Ethereum network");
+    }
+
   };
   return (
-    <div className="flex ">
-      <div className="flex-none w-1/6 m-10 ">
-        <Form form={regForm} onFinish={handleSubmit}>
-          <Form.Item
-            label="Email"
-            name="email"
-            rules={[{ required: true, message: "Please input your price!" }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Password"
-            name="password"
-            rules={[{ required: true, message: "Please input your quantity!" }]}
-          >
-            <Input />
-          </Form.Item>
-          <Form.Item
-            label="Address"
-            name="address"
-            rules={[{ required: true, message: "Please input your quantity!" }]}
-          >
-            <Input />
-          </Form.Item>
+    <Spin spinning={spin} tip='Adding to blockchain...'>
 
-          <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-            <Button onClick={regForm.submit}>Submit</Button>
-          </Form.Item>
-        </Form>
-      </div>
-    </div>
+        <div className="flex-none  ">
+          <Form form={regForm} onFinish={handleSubmit}>
+            <Form.Item
+              label="Email"
+              name="email"
+              rules={[{ required: true, message: "Please input your price!" }]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="Password"
+              name="password"
+              rules={[{ required: true, message: "Please input your password!" }]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="Address"
+              name="address"
+              rules={[{ required: true, message: "Please input your address!" }]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+              <Button onClick={regForm.submit}>Submit</Button>
+            </Form.Item>
+          </Form>
+        </div>
+   
+    </Spin>
   );
 };
 
