@@ -1,5 +1,5 @@
 import React from "react";
-import { GeneratorPage } from "./pages";
+import MainPage from "./pages/pages/mainPage";
 import { Layout, Menu } from "antd";
 import "antd/dist/antd.css";
 import "./antd.css";
@@ -8,7 +8,7 @@ const App = () => {
   const { Header, Content, Footer } = Layout;
   return (
     <div className="min-h-screen">
-      <GeneratorPage/>
+      <MainPage/>
     </div>
   );
 };

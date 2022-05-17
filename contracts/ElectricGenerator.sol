@@ -8,7 +8,8 @@ contract ElectricGenerator {
     address public owner;
     /* ------------------------------ALL STRUCT----------------------------------------------------------- */
     struct GeneratorInfo {
-        uint GeneratorId;
+        uint Id;
+        string Username;
         string Email;
         string Password;
         string Address;
@@ -16,13 +17,13 @@ contract ElectricGenerator {
     }
 
     struct GeneratorLoginValidator {
-        uint GeneratorId;
+        uint Id;
         string Email;
         string Password;
     }
 
     struct LockStorage {
-        uint GeneratorId;
+        uint Id;
         uint LockAmount;
     }
 
@@ -43,9 +44,9 @@ contract ElectricGenerator {
 
 
     /* ------------------------------ALL FUNCTIONS----------------------------------------------------------- */
-    function registerGenerator( string memory _email, string memory _password, string memory _address) public returns(uint) {
+    function registerGenerator( string memory _username,string memory _email, string memory _password, string memory _address) public returns(uint) {
         id = id + 1;
-        currentGenerator[id] = GeneratorInfo(id, _email, _password, _address, msg.sender);
+        currentGenerator[id] = GeneratorInfo(id,_username, _email, _password, _address, msg.sender);
         loginValidator.push(GeneratorLoginValidator(id, _email, _password));
         return id;
     }
