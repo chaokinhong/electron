@@ -26,12 +26,13 @@ const LockElectricityForm = () => {
 
     return (
         <Spin spinning={spin} tip='Adding to blockchain'>
-
-            <div className="flex-none">
+            <h2 className="p-2 font-bold text-lg">Lock Electricity and get ETH</h2>
+            <div className="flex-none p-10">
                 <Form form={lockForm} onFinish={handleForm}>
                     <Form.Item label="Quantity" name="quantity" rules={[{ required: true, message: "Please input your email!" }]}>
                         <Input />
                     </Form.Item>
+                    <h2 className="p-4">Estimated Get: {} ETH</h2>
                     <Form.Item>
                         <Button onClick={lockForm.submit}>Submit</Button>
                     </Form.Item>

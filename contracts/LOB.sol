@@ -1,7 +1,7 @@
 pragma solidity ^0.8.13;
 
 import "./ElectronToken.sol";
-import "./ElectricGenerator.sol";
+import "./Bank.sol";
 
 
 
@@ -37,15 +37,15 @@ contract LOB {
     uint public orderId;
     mapping(uint=> OrderInfo) public orderInfo;
     ElectronToken public electronToken;
-    ElectricGenerator public electricGenerator;
+    Bank public bank;
     uint[] public buyPriceList;
     uint[] public sellPriceList;
 
 
 
     /* ------------------------------CONSTRUCTOR----------------------------------------------------------- */
-    constructor(ElectricGenerator _electricGenerator,ElectronToken _electronToken) public {
-        electricGenerator = _electricGenerator;
+    constructor(Bank _bank,ElectronToken _electronToken) public {
+        bank = _bank;
         electronToken = _electronToken;
         owner = msg.sender;
     }
@@ -154,7 +154,6 @@ contract LOB {
 
 
     /*---------------------INSIDE CONTRACT FUNCTION------------------------------------------------- */
-
 
 
 
